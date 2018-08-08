@@ -96,7 +96,7 @@ download_catch_rates = function( survey="Eastern_Bering_Sea", add_zeros=TRUE, sp
       "cpue_kg_per_ha_der", "cpue_numbers_per_ha_der",
       "vessel_id", "project", "actual_station_design_dim$mean_depth_m", "blank")
     # also could include these variables for general data pulls: "common_name", "species_category", "species_subcategory", "date_dim$full_date", 
-    URLbase <- "https://www.nwfsc.noaa.gov/data/api/v1/source/trawl.catch_fact/selection.json?filters=project=Groundfish%20Slope%20and%20Shelf%20Combination%20Survey,performance=Satisfactory,"
+    URLbase <- "https://www.nwfsc.noaa.gov/data/api/v1/source/trawl.catch_fact/selection.json?filters=project=Groundfish%20Slope%20and%20Shelf%20Combination%20Survey,performance=Satisfactory,date_dim$year>2002"
 
     # Download pieces
     if( is.null(localdir) | !file.exists(paste0(localdir,"/WCGBTS_download.RData")) ){
