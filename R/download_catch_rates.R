@@ -91,7 +91,7 @@ download_catch_rates = function( survey="Eastern_Bering_Sea", add_zeros=TRUE, sp
   # https://www.nwfsc.noaa.gov/data/
   if( survey=="WCGBTS" ){
     # Names of pieces
-    files = 2003:2017
+    files = 2003:2015
     Vars = c("field_identified_taxonomy_dim$scientific_name", "date_dim$year", "tow",
       "latitude_dd", "longitude_dd", "centroid_id", "area_swept_ha_der",
       "cpue_kg_per_ha_der", "cpue_numbers_per_ha_der",
@@ -120,7 +120,7 @@ download_catch_rates = function( survey="Eastern_Bering_Sea", add_zeros=TRUE, sp
 
     # Convert from KG and Num per Hectare to KG and Num, with hectares as a separate column
     if( "area_swept_ha_der" %in% colnames(Downloaded_data) ){
-      Downloaded_data[c('cpue_kg_per_ha_der','cpue_numbers_per_ha_der')] = Downloaded_data[c('cpue_kg_per_ha_der','cpue_numbers_per_ha_der')] * outer(Downloaded_data[,'area_swept_ha_der'],c(1,1))
+      Downloaded_data[c('cpue_kg_per_ha_der','cpue_numbers_per_ha_der')] = Downloaded_data[c('cpue_kg_per_ha_der','cpue_numbers_per_ha_der')] * outer(Downloaded_data['area_swept_ha_der'],c(1,1))
     }else{
       Downloaded_data = cbind( Downloaded_data, "area_swept_ha_der"=1 )
     }
