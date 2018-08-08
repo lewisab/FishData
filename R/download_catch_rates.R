@@ -91,12 +91,13 @@ download_catch_rates = function( survey="Eastern_Bering_Sea", add_zeros=TRUE, sp
   # https://www.nwfsc.noaa.gov/data/
   if( survey=="WCGBTS" ){
     # Names of pieces
-    files = 2003:2015
-    Vars = c("field_identified_taxonomy_dim$scientific_name", "date_dim$year", "tow",
+    files = 2003:2017
+    Vars = c("field_identified_taxonomy_dim$scientific_name", "common_name", "species_category", 
+      "species_subcategory", "date_dim$full_date", "date_dim$year", "tow",
       "latitude_dd", "longitude_dd", "centroid_id", "area_swept_ha_der",
       "cpue_kg_per_ha_der", "cpue_numbers_per_ha_der",
       "vessel_id", "project", "actual_station_design_dim$mean_depth_m", "blank")
-    URLbase <- "https://www.nwfsc.noaa.gov/data/api/v1/source/trawl.catch_fact/selection.json?filters=project=Groundfish%20Slope%20and%20Shelf%20Combination%20Survey,"
+    URLbase <- "https://www.nwfsc.noaa.gov/data/api/v1/source/trawl.catch_fact/selection.json?filters=project=Groundfish%20Slope%20and%20Shelf%20Combination%20Survey,performance=Satisfactory"
 
     # Loop through download pieces
     Downloaded_data = NULL
@@ -125,7 +126,7 @@ download_catch_rates = function( survey="Eastern_Bering_Sea", add_zeros=TRUE, sp
     }
 
     # Harmonize column names
-    Data = rename_columns( Downloaded_data[,Vars[which(Vars%in%names(Downloaded_data))]], newname=c("Sci","Year","TowID","Lat","Long","Cell","AreaSept_ha","Wt","Num","Vessel","Proj","Depth_m")[which(Vars%in%names(Downloaded_data))] )
+    Data = rename_columns( Downloaded_data[,Vars[which(Vars%in%names(Downloaded_data))]], newname=c("Sci","Common","Category","Subcategory","Date","Year","TowID","Lat","Long","Cell","AreaSept_ha","Wt","Num","Vessel","Proj","Depth_m")[which(Vars%in%names(Downloaded_data))] )
     Data[,'TowID'] = paste0( Data[,'Year'], "_", Data[,'TowID'], "_", Data[,'Cell'] )
   }
 
