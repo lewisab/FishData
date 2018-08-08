@@ -120,7 +120,7 @@ download_catch_rates = function( survey="Eastern_Bering_Sea", add_zeros=TRUE, sp
 
     # Convert from KG and Num per Hectare to KG and Num, with hectares as a separate column
     if( "area_swept_ha_der" %in% colnames(Downloaded_data) ){
-      Downloaded_data[c('cpue_kg_per_ha_der','cpue_numbers_per_ha_der')] = Downloaded_data[c('cpue_kg_per_ha_der','cpue_numbers_per_ha_der')] * outer(Downloaded_data['area_swept_ha_der'],c(1,1))
+      Downloaded_data[c('cpue_kg_per_ha_der','cpue_numbers_per_ha_der')] = Downloaded_data[c('cpue_kg_per_ha_der','cpue_numbers_per_ha_der')] * outer(Downloaded_data[,'area_swept_ha_der'],c(1,1))
     }else{
       Downloaded_data = cbind( Downloaded_data, "area_swept_ha_der"=1 )
     }
